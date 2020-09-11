@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -59,10 +62,28 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
+      getReq();
       _counter++;
     });
   }
 
+  Future<String> getReq() async{
+
+    var url="http://10.0.2.2:5000/status";
+    http.Response response= await http.Client().get(url,headers: {
+        'Content-Type': 'application/json',
+      },);
+    var res;
+    if(response.statusCode==200)
+      res=json.decode(response.body)['status'];
+
+    print(res);
+
+  }
+  @override
+  void initState(){
+    getReq();
+  }
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
