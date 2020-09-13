@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:td_test_project/utils/app_start_utils.dart';
 
 import 'PuzzlePiece.dart';
 
@@ -98,6 +99,9 @@ class _PuzzleGameState extends State<PuzzleGame> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          Tooltip(message: "Refresh first time start",child: 
+          IconButton(icon: Icon(Icons.refresh), onPressed: ()=> AppStartUtils.refreshFirstTimeStart()),
+          ),
           Row(children: [
             Text(
               "Rows:",
